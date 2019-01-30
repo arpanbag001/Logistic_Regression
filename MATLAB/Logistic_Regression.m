@@ -23,6 +23,9 @@ data = load([inputFilePath '\' inputFileName]);	%The file containing the trainin
 X = data(:,1:end-1);	%Inputs
 Y = data(:,end);		%Outputs
 num_features = size(X,2); %No of features, which is the dimension of X
+min_x = min(min(X));
+max_x = max(max(X));
+
 
 % Print out some data points
 fprintf('\nData loaded.\nFirst 10 examples from the dataset: \n');
@@ -32,7 +35,7 @@ if num_features == 2 %Check if the input is two dimensional
 	%Plot data
 	fprintf('\nPress enter to plot data.\n');
 	pause;
-	plotData(X, Y);
+	plotData(X, Y, min_x, max_x);
 end
 
 fprintf('\nProgram paused. Press enter to continue.\n');
@@ -86,7 +89,7 @@ options = optimset('GradObj', 'on', 'MaxIter', num_iters);
 fprintf('\nTraining complete.\n');
 fprintf('\nPress enter to plot decision boundary.\n');
 pause;
-plotDecisionBoundary(theta, X, Y, polynomial_degree);
+plotDecisionBoundary(theta, X, Y, min_x, max_x, polynomial_degree);
 hold on;
 title(sprintf('lambda = %g', lambda))
 
