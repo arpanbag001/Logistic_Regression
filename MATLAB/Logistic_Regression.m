@@ -53,8 +53,8 @@ pause;
 
 % Note that mapFeature also adds a column of ones for us, so the intercept
 % term is handled
-
-X = mapFeature(X(:,1), X(:,2));
+polynomial_degree = 2;
+X = mapFeature(X(:,1), X(:,2),polynomial_degree);
 
 % Initialize fitting parameters
 initial_theta = zeros(size(X, 2), 1);
@@ -75,7 +75,8 @@ pause;
 
 
 % Set Options
-options = optimset('GradObj', 'on', 'MaxIter', 400);
+num_iters = 400;
+options = optimset('GradObj', 'on', 'MaxIter', num_iters);
 
 % Optimize
 [theta, J, exit_flag] = ...
@@ -85,7 +86,7 @@ options = optimset('GradObj', 'on', 'MaxIter', 400);
 fprintf('\nTraining complete.\n');
 fprintf('\nPress enter to plot decision boundary.\n');
 pause;
-plotDecisionBoundary(theta, X, Y);
+plotDecisionBoundary(theta, X, Y, polynomial_degree);
 hold on;
 title(sprintf('lambda = %g', lambda))
 
