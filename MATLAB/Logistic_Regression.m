@@ -57,7 +57,7 @@ pause;
 % Note that mapFeature also adds a column of ones for us, so the intercept
 % term is handled
 polynomial_degree = 2;
-X = mapFeature(X(:,1), X(:,2),polynomial_degree);
+X = mapFeature(X,polynomial_degree);
 
 % Initialize fitting parameters
 initial_theta = zeros(size(X, 2), 1);

@@ -17,7 +17,7 @@ z = zeros(length(u), length(v));
 % Evaluate z = theta*x over the grid
 for i = 1:length(u)
 	for j = 1:length(v)
-		z(i,j) = mapFeature(u(i), v(j),polynomial_degree)*theta;
+		z(i,j) = mapFeature([u(i), v(j)],polynomial_degree)*theta;
 	end
 end
 z = z'; % important to transpose z before calling contour
