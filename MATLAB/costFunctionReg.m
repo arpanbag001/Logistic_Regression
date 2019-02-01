@@ -25,9 +25,10 @@ h = sigmoid(X*theta);
 J = 1/m*(-Y'*log(h)-(1-Y)'*log(1-h)) + lambda/(2*m)*sum(theta(2:end).^2);
 
 
-
-grad(1) = (1/m*(X'*(h-Y)))(1);	%No need to use regularization for the first weight
-grad(2:end) = (1/m*(X'*(h-Y)) + lambda/m*theta)(2:end);
+first_weight = (1/m*(X'*(h-Y)));
+rest_weights = (1/m*(X'*(h-Y)) + lambda/m*theta);
+grad(1) = first_weight(1);	%No need to use regularization for the first weight
+grad(2:end) = rest_weights(2:end);
 
 
 % =============================================================

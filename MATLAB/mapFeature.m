@@ -10,9 +10,8 @@ function new_X = mapFeature(X, degree)
 %   Inputs X1, X2 must be the same size
 %
 
-m  = size(X)(1);  % number of training examples
-num_features = size(X)(2);     % number of features
-max_degree  = 3;     % Order of polynomial
+m  = size(X,1);  % number of training examples
+num_features = size(X,2);     % number of features
 
 
 

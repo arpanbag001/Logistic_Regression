@@ -79,7 +79,7 @@ pause;
 
 % Set Options
 num_iters = 400;
-options = optimset('GradObj', 'on', 'MaxIter', num_iters);
+options = optimset('GradObj', 'on', 'MaxIter', num_iters,'PlotFcn','optimplotfval');
 
 % Optimize
 [theta, J, exit_flag] = ...
