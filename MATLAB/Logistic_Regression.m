@@ -12,6 +12,7 @@ pause;
 %Open the file selection dialogue
 [inputFileName,inputFilePath] = uigetfile({
    '*.txt','Text (*.txt)'; ...
+   '*.csv','CSV (*.csv)'; ...
    '*.*',  'All Files (*.*)'}, ...
    'Select the Data file');
    
@@ -32,6 +33,8 @@ fprintf('\nData loaded.\nFirst 10 examples from the dataset: \n');
 disp([X(1:10,:),Y(1:10,:)])
 
 if num_features == 2 %Check if the input is two dimensional
+    min_x = min(min(X));
+    max_x = max(max(X));
 	%Plot data
 	fprintf('\nPress enter to plot data.\n');
 	pause;
@@ -87,18 +90,24 @@ options = optimset('GradObj', 'on', 'MaxIter', num_iters,'PlotFcn','optimplotfva
 
 % Plot Boundary
 fprintf('\nTraining complete.\n');
-fprintf('\nPress enter to plot decision boundary.\n');
-pause;
-plotDecisionBoundary(theta, X, Y, min_x, max_x, polynomial_degree);
-hold on;
-title(sprintf('lambda = %g', lambda))
 
-% Labels and Legend
-xlabel('Feature 2 (x2)')
-ylabel('Feature 2 (x2)')
+if num_features == 2 %Check if the input is two dimensional
+	%Plot decision boundary
+	fprintf('\nPress enter to plot decision boundary.\n');
+	pause;
+	plotDecisionBoundary(theta, X, Y, min_x, max_x, polynomial_degree);
+	hold on;
+	title(sprintf('lambda = %g', lambda))
 
-legend('y = 1', 'y = 0', 'Decision boundary')
-hold off;
+	% Labels and Legend
+	xlabel('Feature 2 (x2)')
+	ylabel('Feature 2 (x2)')
+
+	legend('y = 1', 'y = 0', 'Decision boundary')
+	hold off;
+
+end
+
 
 fprintf('\nPress enter to start evaluation.\n');
 pause;
